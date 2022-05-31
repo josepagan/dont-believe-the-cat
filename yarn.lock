@@ -1543,6 +1543,11 @@
   "resolved" "https://registry.npmjs.org/source-map-js/-/source-map-js-1.0.2.tgz"
   "version" "1.0.2"
 
+"sqlite@^4.1.1":
+  "integrity" "sha512-qssVl58Q4ytWabIK7e3lIjDuiXu0sq+M2foXFILrlJwpHisTgywQ5wDB5ImcOPMbuZHX3Q5gmlcDgX3m+VBfdw=="
+  "resolved" "https://registry.npmjs.org/sqlite/-/sqlite-4.1.1.tgz"
+  "version" "4.1.1"
+
 "string.prototype.matchall@^4.0.7":
   "integrity" "sha512-f48okCX7JiwVi1NXCVWcFnZgADDC/n2vePlQ/KUCNqCikLLilQvwjMO8+BHVKvgzH0JB0J9LEPgxOGT02RoETg=="
   "resolved" "https://registry.npmjs.org/string.prototype.matchall/-/string.prototype.matchall-4.0.7.tgz"
