@@ -1,20 +1,30 @@
 -- Up
 CREATE TABLE User (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    email TEXT
-)
+    name VARCHAR(50) NOT NULL,
+    email TEXT  NOT NULL UNIQUE,
+    homeId INTEGER KEY REFERENCES Home(id)
+
+);
 
 CREATE TABLE Home (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     
-)
+);
 
 CREATE TABLE Cat (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
-    ownerId INTEGER FOREIGN KEY REFERENCES User(id)
-)
+    homeId INTEGER KEY REFERENCES Home(id)
+);
+
+-- INSERT INTO User(name,email) VALUES ('Jose','jm.pagan@omg.com')
+
+
+
+
+
+
 --Down
 DROP TABLE User;
 DROP TABLE Home;
