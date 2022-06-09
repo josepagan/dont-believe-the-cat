@@ -2,10 +2,12 @@
 // import Image from 'next/image'
 import { useEffect } from "react";
 import NavBar from '../components/NavBar';
+import fetchUsers from '../features/users/usersSlice'
 
 // import styles from '../styles/Home.module.css'
 
 export default function Home() {
+
   // useEffect(() => { console.log("Hello from the client side") }, [])
   return (
     <>
@@ -13,3 +15,5 @@ export default function Home() {
     </>
   )
 }
+
+//add here fetchusers (maybe using ssr??? OMG)
