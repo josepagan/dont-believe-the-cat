@@ -7,26 +7,26 @@ CREATE TABLE User (
 
 );
 
--- CREATE TABLE Home (
---     id INTEGER PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE Home (
+    id INTEGER PRIMARY KEY AUTOINCREMENT
     
--- );
+);
 
--- CREATE TABLE Cat (
---     id INTEGER PRIMARY KEY AUTOINCREMENT,
---     name TEXT,
---     homeId INTEGER KEY REFERENCES Home(id)
--- );
+CREATE TABLE Cat (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    homeId INTEGER KEY REFERENCES Home(id)
+);
 
--- -- INSERT INTO User(name,email) VALUES ('Jose','jm.pagan@omg.com')
-
-
+INSERT INTO User(name,email) VALUES ('Jose','jm.pagan@omg.com');
 
 
 
 
--- --Down
--- DROP TABLE User;
--- DROP TABLE Home;
+
+
+--Down
 -- DROP TABLE Cat;
+-- DROP TABLE Home;
+-- DROP TABLE User;
 
