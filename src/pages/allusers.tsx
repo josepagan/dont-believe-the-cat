@@ -1,32 +1,27 @@
 import { GetServerSideProps } from "next"
-import {fetchUsers} from "../features/users/usersSlice"
 import { useDispatch } from "react-redux"
-import { useEffect } from "react"
+import { getAllUsersDB } from "./api/users"
+
 import type { AppDispatch } from '../store/store'
 
-
-
-
-export default function AllUsers() {
-console.log("does this work?")
-const dispatch: AppDispatch = useDispatch()
-const handleDispatch = () => {
-  console.log("button clicked")
-  dispatch(fetchUsers())
+interface Users {
 }
-// useEffect(()=>{
-//   dispatch(fetchUsers)
-// },[])
+
+//TODO implement users type grrrr
+export default function AllUsers({users}) {
+
+  const dispatch: AppDispatch = useDispatch()
+  
   return (
     <>
-	    <h1>OMG</h1>
-      <button onClick={handleDispatch}>dont click</button>
+      <h1>OMG</h1>
+      <div>{JSON.stringify(users)}</div>
     </>
   )
 }
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const users = await getAllUsersDB()
+  return { props: { users } }
 
-// 	return {props: {users}} 
-
-// }
+}
