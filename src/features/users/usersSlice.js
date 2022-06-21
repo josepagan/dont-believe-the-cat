@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = [  { id: '1', name: "Nikki" },
-{ id: '2', name: 'Macarena' }]
+const initialState = []
+
+// type userReducer = typeof initialState
 
 const postSlice = createSlice({
     name: 'users',
@@ -16,7 +17,7 @@ const postSlice = createSlice({
     }
 })
 
-export default postSlice.reducer
+export default postSlice.reducer 
 
 //maybe put all thunks in one place?
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async ()=>{
