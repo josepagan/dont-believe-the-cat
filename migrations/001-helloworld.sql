@@ -21,10 +21,6 @@ CREATE TABLE Cat (
 INSERT INTO User(name,email) VALUES ('Jose','jm.pagan@omg.com');
 
 
-
-
-
-
 --Down
 -- DROP TABLE Cat;
 -- DROP TABLE Home;

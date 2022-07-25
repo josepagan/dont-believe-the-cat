@@ -1,17 +1,34 @@
 import App from 'next/app';
 import '../styles/globals.css'
 import { Provider } from 'react-redux'
-import store from '../store/store'
+import {initializeStore}from '../store/store'
 import NavBar from '../components/NavBar';
 
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Provider store={store}>
+    <>
+    {/* <Provider store={undefined}> */}
       <NavBar />
       <Component {...pageProps} />
-    </Provider>
+    {/* </Provider> */}
+    </>
   )
+}
+
+MyApp.getInitialProps = async (appContext) => {
+  // calls page's `getInitialProps` and fills `appProps.pageProps`
+  const appProps = await App.getInitialProps(appContext);
+  //here we initialise the store
+  const reduxStore = initializeStore({})
+
+  appProps.pageProps = {
+    ...appProps.pageProps,
+    initialReduxState: reduxStore.getState(),
+    shittyValue: "Shit!"
+  }
+
+  return { ...appProps }
 }
 
 //TODO try to figure outwhy this block gives me top level await experiment error, compare with the block in 

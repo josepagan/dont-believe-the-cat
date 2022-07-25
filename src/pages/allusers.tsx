@@ -1,5 +1,7 @@
 import { GetServerSideProps } from "next"
 import { getAllUsersDB } from "./api/users"
+import {initializeStore} from "../store/store"
+
 
 interface User {
   id: number;
@@ -22,5 +24,11 @@ export default function AllUsers({ users }: AllUsersProps) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const users: User[] = await getAllUsersDB()
+
+  const reduxStore = initializeStore({})
+  const {dispatch} = reduxStore
+  dispatch()
+
+
   return { props: {users} }
 }
