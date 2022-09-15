@@ -1,7 +1,9 @@
 import { GetServerSideProps } from "next"
-import { getAllUsersDB } from "./api/users"
-import {initializeStore} from "../store/store"
+import { useEffect } from "react";
+import { fetchUsers } from "../features/users/usersSlice";
+import getStore from "../store/store";
 
+//TODO this is really just a demo to get something into redux, not very realistic to keep this page
 
 interface User {
   id: number;
@@ -12,9 +14,11 @@ interface User {
 interface AllUsersProps {
   users: User[]
 }
-export default function AllUsers({ users }: AllUsersProps) {
-
+export default function AllUsers(users) {
+  useEffect(()=>{console.log("hello from the client")})
+//TODO i have to actually impement picking data from the store and see if the hydration actually happens
   return (
+    //
     <>
       <h1>OMG</h1>
       <div>{JSON.stringify(users)}</div>
@@ -23,12 +27,9 @@ export default function AllUsers({ users }: AllUsersProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const users: User[] = await getAllUsersDB()
+  
+  const reduxStore = getStore()
+  await reduxStore.dispatch(fetchUsers())
 
-  const reduxStore = initializeStore({})
-  const {dispatch} = reduxStore
-  dispatch()
-
-
-  return { props: {users} }
+  return { props: {initialState:reduxStore.getState()} }
 }

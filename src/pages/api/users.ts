@@ -15,5 +15,5 @@ export default async function getAllUsers(req: NextApiRequest, res: NextApiRespo
     }
     const users = await getAllUsersDB()
 
-    res.json(users)
+    res.status(200).json(users)
 }
