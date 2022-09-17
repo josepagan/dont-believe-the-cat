@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import AllUsers from "../../pages/allusers";
 
 interface User {
   id: number;
@@ -13,7 +14,7 @@ export type UserState = {
 }
 
 
-const initialState = []
+const initialState = {allUsers:[], registration:{registering:false, current:{}}}
 
 // type userReducer = typeof initialState
 
@@ -24,7 +25,12 @@ const postSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchUsers.fulfilled, (state, action) => {
-        return action.payload
+        state.allUsers = action.payload
+      })
+      .addCase(addUser.pending, (state, action) => {
+        state.registration.registering = true;
+        // state.registration.current = action
+
       })
   }
 })
@@ -35,4 +41,8 @@ export default postSlice.reducer
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
   const fetched =  await axios.get('http://localhost:3000/api/users')
   return fetched.data as User[]
+})
+
+export const addUser = createAsyncThunk('users/addUser', async (newUserObj)=>{
+  await axios.post('http://localhost:3000/api/user/addUser',newUserObj)
 })
