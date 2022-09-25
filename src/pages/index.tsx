@@ -3,16 +3,19 @@
 import { GetServerSideProps } from "next/types";
 import { useEffect } from "react";
 import NavBar from '../components/NavBar';
-import getStore from "../store/store";
+import initialiseStore from "../store/store";
 
 // import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export default function Home(props) {
 
   // useEffect(() => { console.log("Hello from the client side") }, [])
   return (
     <>
       <h1>Don't believe the cat</h1>
+
+      <div>{JSON.stringify(props)}</div>
+
     </>
   )
 }
@@ -21,7 +24,7 @@ export default function Home() {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   
-  const reduxStore = getStore()
+  const reduxStore = initialiseStore()
 
   return { props: {initialState:reduxStore.getState()} }
 }

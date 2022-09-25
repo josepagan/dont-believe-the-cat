@@ -1,19 +1,20 @@
 import { GetServerSideProps } from "next"
 import { useState } from "react"
-import { useDispatch } from "react-redux"
-import getStore from "../store/store"
+import { addUser } from "../features/users/usersSlice"
+import initialiseStore, { useAppDispatch } from "../store/store"
 
 //TODO implement some sort of validation mavybe using yup. read about yup
 export default function NewUserFormPage() {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [showJoinHome, toggleJoinHome] = useState(false)
     const [existingHomeId, setExistingHomeId] = useState(null)
 
     const handlesubmit = (e) => {
-        e.preventDefault()
         console.log(e)
+        dispatch(addUser())
+        e.preventDefault()
     }
 
     return (
@@ -38,6 +39,6 @@ export default function NewUserFormPage() {
     )
 }
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const reduxStore = getStore()
+    const reduxStore = initialiseStore()
     return { props: {initialState:reduxStore.getState()} }
   }
