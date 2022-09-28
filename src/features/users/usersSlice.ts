@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { HYDRATE } from "next-redux-wrapper";
 import AllUsers from "../../pages/allusers";
 
 interface User {
@@ -14,11 +15,11 @@ export type UserState = {
 }
 
 
-const initialState = {allUsers:[], registration:{registering:false, current:{}}}
+const initialState = {allUsers:[]}
 
 // type userReducer = typeof initialState
 
-const postSlice = createSlice({
+const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {},
@@ -27,18 +28,39 @@ const postSlice = createSlice({
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.allUsers = action.payload
       })
-      .addCase(addUser.pending, (state, action) => {
-        state.registration.registering = true;
+      .addCase(fetchUsers.pending, (state, action) => {
+        console.log("PENDING!!!")
+      })
+      // .addCase(addUser.pending, (state, action) => {
+      //   state.registration.registering = true;
         // state.registration.current = action
-
+      // })
+      .addCase(HYDRATE, (state, action: any) => {
+        // console.log("hydrate action:", action)
+        
+         return {...state, ...action.payload.user}
       })
   }
 })
 
-export default postSlice.reducer
+// const reducer = (state, action) => {
+//   if (action.type === HYDRATE) {
+//     const nextState = {
+//       ...state, // use previous state
+//       ...action.payload, // apply delta from hydration
+//     }
+//     if (state.count.count) nextState.count.count = state.count.count // preserve count value on client side navigation
+//     return nextState
+//   } else {
+//     return combinedReducer(state, action)
+//   }
+// }
+
+
+export default userSlice.reducer
 
 //maybe put all thunks in one place?
-export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
+export const fetchUsers = createAsyncThunk('user/fetchUsers', async () => {
   const fetched =  await axios.get('http://localhost:3000/api/users')
   return fetched.data as User[]
 })
